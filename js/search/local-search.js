@@ -3,15 +3,17 @@ $(function () {
   $('a.social-icon.search').on('click', function () {
     $('body').css('width', '100%')
     $('body').css('overflow', 'hidden')
-    $('.search-dialog').animate({}, function () {
-      $('.search-dialog').css({
-        'display': 'block',
-        'animation': 'titlescale 0.5s'
-      })
-    })
+    $('.search-dialog').velocity('stop')
+      .velocity('transition.expandIn', {
+        duration: 300,
+        complete: function () {
           $('#local-search-input input').focus()
-  
-          $('.search-mask').fadeIn();
+        }
+      })
+    $('.search-mask').velocity('stop')
+      .velocity('transition.fadeIn', {
+        duration: 300
+      })
     if (!loadFlag) {
       search(GLOBAL_CONFIG.localSearch.path)
       loadFlag = true
@@ -28,12 +30,14 @@ $(function () {
 
   var closeSearch = function () {
     $('body').css('overflow', 'auto')
-    $('.search-dialog').animate({}, function () {
-      $('.search-dialog').css({
-        'display': 'none'
+    $('.search-dialog').velocity('stop')
+      .velocity('transition.expandOut', {
+        duration: 300
       })
-    })
-    $('.search-mask').fadeOut();
+    $('.search-mask').velocity('stop')
+      .velocity('transition.fadeOut', {
+        duration: 300
+      })
   }
   $('.search-mask, .search-close-button').on('click', closeSearch)
 

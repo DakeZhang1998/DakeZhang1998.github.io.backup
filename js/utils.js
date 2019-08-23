@@ -39,16 +39,8 @@ function isMobile() {
   return check
 };
 
-function scrollTo(name) {
-  var scroll_offset = $(name).offset();
-  $("body,html").animate({
-    scrollTop: scroll_offset.top
-  })  
-};
-
 window.debounce = debounce
 
 window.throttle = throttle
 
 window.isMobile = isMobile
-
